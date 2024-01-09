@@ -1,14 +1,29 @@
-_compdef briefcase
+#compdef briefcase
 
 _briefcase() {
     local -a commands
     commands=(
       'set:add or update a briefcase value'
       'get:get a briefcase value'
+      'list:see all briefcase entries'
+      'remove:remove a briefcase entry'
+      'purge:empty the whole briefcase'
+      'info:see where breifcase is storing data'
+      'help:see all commands'
+      'version:see version info'
     )
 
     if (( CURRENT == 2 )); then
-      _describe -t commands 'commands' commands
+      _describe 'commands' commands
+      return 0
+    fi
+
+    local -a entries
+    entries=(${(f)"$(briefcase list)"})
+
+
+    if (( CURRENT == 3 )); then
+      _describe 'commands' entries
     fi
 
     return 0
