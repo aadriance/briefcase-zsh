@@ -1,0 +1,17 @@
+_compdef briefcase
+
+_briefcase() {
+    local -a commands
+    commands=(
+      'set:add or update a briefcase value'
+      'get:get a briefcase value'
+    )
+
+    if (( CURRENT == 2 )); then
+      _describe -t commands 'commands' commands
+    fi
+
+    return 0
+}
+
+_briefcase
